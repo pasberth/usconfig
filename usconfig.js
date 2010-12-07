@@ -459,6 +459,7 @@ bp.dialog = function(title /* , [attrs,] sections... */) {
     head.appendChild(style);
     body.style.margin  = '0';
     body.style.padding = '0';
+    body.style.backgroundColor = "#ffffff";
     body.appendChild(dcon);
     // now the dialog is ready to show
 
