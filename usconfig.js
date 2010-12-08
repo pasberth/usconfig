@@ -1,25 +1,46 @@
-// = USConfig
-//
+//============================================================================
+// USConfig
 // User Script's Config dialog library
+<<<<<<< HEAD
 // version 1.1.2
+=======
+//
+// File    : usconfig.js
+// Author  : h1mesuke <himesuke@gmail.com>
+// Updated : 2010-12-08
+// Version : 1.1.1
+>>>>>>> 9ed704aaf12a5af44cd9f7b47a06f7ac04b24437
 //
 // == Description
 //
 // USConfig is a library that provides GUI dialogs to help the user
 // configuring the script easily.
 //
-// == Author
-//
-// h1mesuke
-// http://d.hatena.ne.jp/h1mesuke/
-//
-// Copyright (c) 2010 h1mesuke
-//
 // == License
 //
-// Licensed under the MIT license:
-// http://www.opensource.org/licenses/mit-license.php
+//    Licensed under the MIT license:
 //
+//    Permission is hereby granted, free of charge, to any person obtaining
+//    a copy of this software and associated documentation files (the
+//    "Software"), to deal in the Software without restriction, including
+//    without limitation the rights to use, copy, modify, merge, publish,
+//    distribute, sublicense, and/or sell copies of the Software, and to
+//    permit persons to whom the Software is furnished to do so, subject to
+//    the following conditions:
+//    
+//    The above copyright notice and this permission notice shall be included
+//    in all copies or substantial portions of the Software.
+//    
+//    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
+//    OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+//    MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+//    IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
+//    CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+//    TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
+//    SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+//
+//============================================================================
+
 var Config = {
   // Dialog instances
   dialogs: {},
@@ -103,6 +124,9 @@ var Config = {
   debug: false,
 };
 
+// alias
+Config.close = Config.remove;
+
 //---------------------------------------------------------------------------
 // I18n
 
@@ -184,16 +208,17 @@ dp.dummyBuild = function() {
 };
 
 dp.load = function() {
-  var data = GM_getValue(this.saveKey, '({})');
-  this.settings = window.JSON && window.JSON.parse ?
-				window.JSON.parse(data) :
-				(new Function("return " + data))();
+  var data = GM_getValue(this.saveKey, '{}');
+  try {
+    this.settings = JSON.parse(data);
+  } catch(e) {
+    this.settings = (new Function("return (" + data + ")"))();
+    JSON && JSON.stringify && this.save();
+  }
 };
 
 dp.save = function() {
-	var data = window.JSON && window.JSON.parse ?
-			window.JSON.stringify(this.settings) :
-			this.settings.toSource();
+  var data = (JSON && JSON.stringify) ? JSON.stringify(this.settings) : this.settings.toSource();
   GM_setValue(this.saveKey, data);
 
   Config.debug && GM_log("\nUSCONFIG: DEBUG: SETTINGS SAVED for \"" + this.name +
