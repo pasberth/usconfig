@@ -1,15 +1,11 @@
 //============================================================================
 // USConfig
 // User Script's Config dialog library
-<<<<<<< HEAD
-// version 1.1.2
-=======
 //
 // File    : usconfig.js
 // Author  : h1mesuke <himesuke@gmail.com>
 // Updated : 2010-12-08
 // Version : 1.1.1
->>>>>>> 9ed704aaf12a5af44cd9f7b47a06f7ac04b24437
 //
 // == Description
 //
