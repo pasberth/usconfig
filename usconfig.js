@@ -1152,7 +1152,7 @@ bp._style = function(theme, gap) {
       margin-left: <%gap%>px;\
       font-size: 9pt;\
     }\
-  ]]></>'.toString();
+  ]]>'.toString();
 
   with (env) {
     css = css.replace(/<%(.*?)%>/g, function(str, p1) {
